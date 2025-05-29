@@ -16,5 +16,5 @@ jobs:
     - name: Deploy www to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.PAT }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./www
