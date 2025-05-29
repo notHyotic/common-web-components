@@ -1,0 +1,10 @@
+github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
+github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
+gotest.tools/v3 v3.5.1 h1:EENdUnS3pdur5nybKYIh2Vfgc8IUNBjxDPSjtiJcOzU=
+gotest.tools/v3 v3.5.1/go.mod h1:isy3WKz7GK6uNw/sbHzfKBLvlvXwUyV06n6brMxxopU=
+lesiw.io/defers v0.9.0 h1:Sg7RYbhxfHhXMHclO65MJ4oRbyhfSBSeHQw4YjLr6n0=
+lesiw.io/defers v0.9.0/go.mod h1:AP09yGFHxL5vmTVJxkPL33N1hWI4OzHwTEOzilbDZU4=
+lesiw.io/flag v0.7.0 h1:+8rTdoplDMBhOSKok5eKP6ZuLLPTodkDABRY7jfX5JU=
+lesiw.io/flag v0.7.0/go.mod h1:bJx6Hir8MAXkNiO6BbrvhwZuaJF4rQWthQ7pc1DlWZY=
+lesiw.io/ops v0.14.0 h1:WTdNxlqL2HjDgpDd5VqoaQwKOqvu1CeR1Wi1wk6wJ0E=
+lesiw.io/ops v0.14.0/go.mod h1:onq4+252Tz6+DzGMtUiibOm7+KJW+ty8v5OBJ91Yb7M=
