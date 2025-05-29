@@ -20,7 +20,7 @@
     "./loader": {
       "import": "./loader/index.js",
       "require": "./loader/index.cjs",
-      "types": "./loader/index.d.ts"
+      "types": "./loader/index.d.ts"  
     }
   },
   "repository": {
