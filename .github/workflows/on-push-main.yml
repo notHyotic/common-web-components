@@ -12,6 +12,9 @@ jobs:
     steps:
     - run: |
         git clone --depth=1 https://github.com/${{ github.repository }} repo
+        cd repo
+        git checkout ${{ github.ref_name }}
+        ls -lah
 
     - uses: aws-actions/configure-aws-credentials@v4
       with:
