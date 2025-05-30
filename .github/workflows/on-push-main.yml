@@ -7,9 +7,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    container: 
+      image: hy0tic/common-runner-image
     steps:
     - uses: actions/checkout@v3
-
-    - run: npm install
-    - run: npm run build
+    - run: | 
+        op upload
     
