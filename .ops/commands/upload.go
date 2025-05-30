@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"lesiw.io/cmdio/sys"
-	lib "ops/lib"
+	s3 "ops/lib"
 )
 
 func (Ops) Upload() {
@@ -24,12 +24,12 @@ func (Ops) Upload() {
 		log.Fatal(err)
 	}
 
-	err = lib.ClearS3Bucket("common-web-components-bucket-dev")
+	err = s3.ClearS3Bucket("common-web-components-bucket-dev")
 	if err != nil {	
 		log.Fatal(err)
 	}
 
-	err = lib.UploadFolderToS3("common-web-components-bucket-dev", "./www")
+	err = s3.UploadFolderToS3("common-web-components-bucket-dev", "./www")
 	if err != nil {
 		log.Fatal(err)
 	}
