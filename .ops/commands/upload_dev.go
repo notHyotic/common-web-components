@@ -7,7 +7,7 @@ import (
 	s3 "ops/lib"
 )
 
-func (Ops) UploadDev() {
+func (Ops) Uploaddev() {
 	var rnr = sys.Runner().WithEnv(map[string]string{
 		"PWD": ".",
 	})
