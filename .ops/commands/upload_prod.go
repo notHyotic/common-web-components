@@ -8,7 +8,7 @@ import (
 )
 
 
-func (Ops) UploadProd() {
+func (Ops) Uploadprod() {
 	var rnr = sys.Runner().WithEnv(map[string]string{
 		"PWD": ".",
 	})
