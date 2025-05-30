@@ -1,9 +1,7 @@
-name: Upload to Dev S3
+name: Upload to Prod S3
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
   deploy:
@@ -25,5 +23,5 @@ jobs:
 
     - run: | 
         cd repo
-        op uploadprod
+        op uploaddev
     

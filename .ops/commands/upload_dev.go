@@ -7,12 +7,13 @@ import (
 	s3 "ops/lib"
 )
 
-func (Ops) Upload() {
+func (Ops) UploadDev() {
 	var rnr = sys.Runner().WithEnv(map[string]string{
 		"PWD": ".",
 	})
 	defer rnr.Close()
 	var err error
+	bucketName := "common-web-components-bucket-dev"
 
 	err = rnr.Run("npm", "install")
 	if err != nil {	
@@ -24,12 +25,12 @@ func (Ops) Upload() {
 		log.Fatal(err)
 	}
 
-	err = s3.ClearS3Bucket("common-web-components-bucket-dev")
+	err = s3.ClearS3Bucket(bucketName)
 	if err != nil {	
 		log.Fatal(err)
 	}
 
-	err = s3.UploadFolderToS3("common-web-components-bucket-dev", "./www")
+	err = s3.UploadFolderToS3(bucketName, "./www")
 	if err != nil {
 		log.Fatal(err)
 	}
