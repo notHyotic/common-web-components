@@ -3,8 +3,10 @@ package lib
 import (
     "context"
     "log"
+    "mime"
     "os"
     "path/filepath"
+    "strings"
 
     "github.com/aws/aws-sdk-go-v2/aws"
     "github.com/aws/aws-sdk-go-v2/config"
@@ -12,9 +14,8 @@ import (
     "github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 )
 
-// UploadFolderToS3 uploads the contents of the ./www folder to the specified S3 bucket.
+// UploadFolderToS3 uploads the contents of a folder to the specified S3 bucket with MIME types and public-read access.
 func UploadFolderToS3(bucketName string, folderPath string) error {
-    // Load AWS configuration
     cfg, err := config.LoadDefaultConfig(context.TODO())
     if err != nil {
         log.Fatal(err)
@@ -23,46 +24,71 @@ func UploadFolderToS3(bucketName string, folderPath string) error {
     client := s3.NewFromConfig(cfg)
     uploader := manager.NewUploader(client)
 
-    // Walk through the folder and upload each file
     err = filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
         if err != nil {
             return err
         }
 
-        // Skip directories
         if info.IsDir() {
             return nil
         }
 
-        // Open the file
         file, err := os.Open(path)
         if err != nil {
             return err
         }
         defer file.Close()
 
-        // Calculate the relative path for the S3 key
         relativePath, err := filepath.Rel(folderPath, path)
         if err != nil {
             return err
         }
 
-        // Upload the file to S3
+        ext := strings.ToLower(filepath.Ext(relativePath))
+        mimeType := mime.TypeByExtension(ext)
+
+        // Normalize common web types if mime.TypeByExtension fails or is incomplete
+        if mimeType == "" {
+            switch ext {
+            case ".js":
+                mimeType = "application/javascript"
+            case ".css":
+                mimeType = "text/css"
+            case ".html", ".htm":
+                mimeType = "text/html"
+            case ".json":
+                mimeType = "application/json"
+            case ".svg":
+                mimeType = "image/svg+xml"
+            case ".woff":
+                mimeType = "font/woff"
+            case ".woff2":
+                mimeType = "font/woff2"
+            default:
+                mimeType = "application/octet-stream"
+            }
+        }
+
+        // Upload the file with MIME type and public-read access
         _, err = uploader.Upload(context.TODO(), &s3.PutObjectInput{
-            Bucket: &bucketName,
-            Key:    aws.String(filepath.ToSlash(relativePath)), // Use relative path for the S3 key
-            Body:   file,
+            Bucket:      aws.String(bucketName),
+            Key:         aws.String(filepath.ToSlash(relativePath)),
+            Body:        file,
+            ContentType: aws.String(mimeType),
+            ACL:         "public-read",
         })
+
         if err != nil {
             return err
         }
 
-        log.Printf("Uploaded %s to bucket %s\n", path, bucketName)
+        log.Printf("Uploaded %s to %s with Content-Type: %s\n", path, bucketName, mimeType)
         return nil
     })
 
     return err
 }
+
 
 func ClearS3Bucket(bucketName string) error {
     // Load AWS configuration
