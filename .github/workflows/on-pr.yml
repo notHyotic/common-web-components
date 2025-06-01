@@ -1,4 +1,4 @@
-name: Upload to Dev S3
+name: PR Checks
 
 on:
     push:
@@ -23,6 +23,5 @@ jobs:
         aws-region: 'us-east-1' # specify your region
 
     - run: | 
-        cd repo
         op hello
     
