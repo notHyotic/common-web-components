@@ -16,6 +16,7 @@ jobs:
       with:
         fetch-depth: 0
         ref: vcs-issue
+        fetch-tags: true
 
     - uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -30,7 +31,7 @@ jobs:
 
     - name: Get Git version info
       run: echo "VERSION=$(git describe --tags --dirty --always)" >> $GITHUB_ENV
-      
+
     - run: | 
         op hello
     
