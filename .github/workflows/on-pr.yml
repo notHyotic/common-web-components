@@ -29,9 +29,6 @@ jobs:
         ls -lah
         cat HEAD
 
-    - name: Get Git version info
-      run: echo "VERSION=$(git describe --tags --dirty --always)" >> $GITHUB_ENV
-
     - run: | 
         op hello
     
