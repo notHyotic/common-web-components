@@ -1,6 +1,8 @@
 name: Upload to Dev S3
 
 on:
+    push:
+        branches: [vcs-issue]
     pull_request:
         branches: [main]
 
