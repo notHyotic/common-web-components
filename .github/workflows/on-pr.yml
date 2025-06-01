@@ -26,6 +26,7 @@ jobs:
     - run: |
         cd .git
         ls -lah
+        cat HEAD
     - run: | 
         op hello
     
