@@ -9,8 +9,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    container: 
-      image: hy0tic/common-runner-image
+    # container: 
+    #   image: hy0tic/common-runner-image
     steps:
     - uses: actions/checkout@v4
     #   with:
