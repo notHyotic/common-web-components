@@ -13,16 +13,6 @@ jobs:
       image: hy0tic/common-runner-image
     steps:
     - uses: actions/checkout@v4
-    #   with:
-    #     fetch-depth: 0
-    #     ref: vcs-issue
-    #     fetch-tags: true
-
-    # - run: |
-    #     cd .git
-    #     ls -lah
-    #     cat HEAD
-
     - run: | 
         go build 
     
